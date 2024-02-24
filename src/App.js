@@ -6,6 +6,7 @@ import {
 } from "@videosdk.live/react-sdk";
 import ReactPlayer from "react-player";
 import axios from "axios";
+// import Cadsy from "cadsy";
 
 let flag = false;
 
@@ -187,7 +188,7 @@ function ParticipantView(props) {
 
 useEffect(() => {
   const intervalId = setInterval(() => {
-    captureAndPostFrames();
+    // captureAndPostFrames();
   }, 3000);
 
   return () => clearInterval(intervalId);
@@ -222,8 +223,8 @@ return (
 const App = () => {
 
   return (
-    // <Cadsy>
     <>
+    {/* <Cadsy> */}
       <MeetingProvider
         config={{
           meetingId: "rae1-g8pe-drp3",
@@ -236,8 +237,8 @@ const App = () => {
         <MeetingView />
       </MeetingProvider>
       {/* <h1 id="cadsyvideotrigger">hi</h1> */}
+       {/* </Cadsy> */}
     </>
-    // </Cadsy>
   );
 };
 
