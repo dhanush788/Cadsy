@@ -69,34 +69,31 @@ function MeetingView() {
   };
 
   return (
-    <div className="container">
-      {joined && joined === "JOINED" ? (
-        <div>
-          {[...participants.keys()].map((participantId) => (
-            <ParticipantView
-              participantId={participantId}
-              key={participantId}
-            />
-          ))}
+    <div className="mx-auto w-full h-screen  flex flex-col items-center justify-center bg-image">
+      <h1 className="text-6xl font-bold leading-7 text-white sm:tracking-tight mt-20 shadow-md">CADSY</h1>
+      <div className="mx-auto  max-w-3xl my-auto bg-[#FCF6F5FF]  px-20  shadow-xl rounded-2xl mt-20 mb-20 bg-image2">
+        {joined && joined === "JOINED" ? (
           <div>
-            <input
-              type="text"
-              value={messageInput}
-              onChange={(e) => setMessageInput(e.target.value)}
-            />
-            <button onClick={handleSendMessage}>Send</button>
-          </div>
-          <div>
-            {messages.map((message, index) => (
-              <div key={index}>{message.message}</div>
+            {[...participants.keys()].map((participantId) => (
+              <ParticipantView
+                participantId={participantId}
+                key={participantId}
+              />
             ))}
+
+            <div>
+              {messages.map((message, index) => (
+                <div key={index}>{message.message}</div>
+              ))}
+            </div>
           </div>
-        </div>
-      ) : joined && joined === "JOINING" ? (
-        <p>Joining the meeting...</p>
-      ) : (
-        <button onClick={joinMeeting}>Join the meeting</button>
-      )}
+        ) : joined && joined === "JOINING" ? (
+          <p>Joining the meeting...</p>
+        ) : (
+          <button onClick={joinMeeting} type="button"
+            className="rounded-md bg-indigo-500 px-2.5 m-20 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Join the meeting</button>
+        )}
+      </div>
     </div>
   );
 }
@@ -187,14 +184,14 @@ function ParticipantView(props) {
 
 useEffect(() => {
   const intervalId = setInterval(() => {
-    captureAndPostFrames();
+    // captureAndPostFrames();
   }, 3000);
 
   return () => clearInterval(intervalId);
 }, [videoRef, ready, canvas]);
 
 return (
-  <div>
+  <div className="w-[21vw]  h-[28vh] flex justify-center items-center bg-[#4C8282] rounded-lg mb-2 mt-2">
     <audio ref={micRef} autoPlay playsInline muted={isLocal} />
     {webcamOn && (
       <ReactPlayer
@@ -208,7 +205,7 @@ return (
         muted={true}
         playing={true}
         url={videoStream}
-        height={"300px"}
+        height={"auto"}
         width={"300px"}
         onError={(err) => {
           console.log(err, "participant video error");
