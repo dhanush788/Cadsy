@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import GenerativeAIComponent from "./component/GenerativeAIComponent.js";
 import {
   MeetingProvider,
   useMeeting,
@@ -6,6 +7,8 @@ import {
 } from "@videosdk.live/react-sdk";
 import ReactPlayer from "react-player";
 import axios from "axios";
+
+
 // import Cadsy from "cadsy";
 
 let flag = false;
@@ -69,31 +72,35 @@ function MeetingView() {
     }
   };
 
+  
   return (
-    <div className="mx-auto w-full h-screen  flex flex-col items-center justify-center bg-image">
-      <h1 className="text-6xl font-bold leading-7 text-white sm:tracking-tight mt-20 shadow-md">CADSY</h1>
-      <div className="mx-auto  max-w-3xl my-auto bg-[#FCF6F5FF]  px-20  shadow-xl rounded-2xl mt-20 mb-20 bg-image2">
-        {joined && joined === "JOINED" ? (
-          <div>
-            {[...participants.keys()].map((participantId) => (
-              <ParticipantView
-                participantId={participantId}
-                key={participantId}
-              />
-            ))}
-
-            <div>
-              {messages.map((message, index) => (
-                <div key={index}>{message.message}</div>
+    <div className="  flex flex-col items-center justify-center bg-image">
+      <h1 className="text-6xl mt-0 font-bold leading-7 text-white sm:tracking-tight mt-20 shadow-md">CADSY</h1>
+      <div className="flex justify-between min-h-min items-center mt-24 w-full">
+        <div className="  max-w-3xl min-h-[40vh] ml-24 bg-[#FCF6F5FF]  px-20  shadow-xl rounded-2xl mt-20 mb-20 bg-image2 max-h-20">
+          {joined && joined === "JOINED" ? (
+            <div className="min-h-min flex justify-center items-center gap-10 px-10 ml-10">
+              {[...participants.keys()].map((participantId) => (
+                <ParticipantView
+                  participantId={participantId}
+                  key={participantId}
+                />
               ))}
+
+              <div>
+                {messages.map((message, index) => (
+                  <div key={index}>{message.message}</div>
+                ))}
+              </div>
             </div>
-          </div>
-        ) : joined && joined === "JOINING" ? (
-          <p>Joining the meeting...</p>
-        ) : (
-          <button onClick={joinMeeting} type="button"
-            className="rounded-md bg-indigo-500 px-2.5 m-20 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Join the meeting</button>
-        )}
+          ) : joined && joined === "JOINING" ? (
+            <p>Joining the meeting...</p>
+          ) : (
+            <button onClick={joinMeeting} type="button"
+              className="rounded-md bg-indigo-500 px-2.5 m-20 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Join the meeting</button>
+          )}
+        </div>
+        <GenerativeAIComponent/>
       </div>
     </div>
   );
